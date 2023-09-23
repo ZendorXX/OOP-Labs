@@ -15,7 +15,7 @@ eliminate_unset_bits("000") -> 0
 #include <string>
 #include <cmath>
 
-long eliminate_unset_bits(std::string const number) {
+long eliminate_unset_bits(const std::string &number) {
     if (number == "" || number.size() == 0) { return -1; }
     for (char bit : number) {
         if (bit == '0' || bit == '1') {
