@@ -33,7 +33,7 @@ long eliminate_unset_bits(const std::string &number) {
     long result = 0;
     int cnt_of_digit = number_without_0.size();
     for (int i = 0; i < cnt_of_digit; ++i) {
-        result += (long)pow(2, cnt_of_digit - i - 1);
+        result += (long)pow(2, cnt_of_digit - i - 1); // плохая реализация
     }
 
     return result;
