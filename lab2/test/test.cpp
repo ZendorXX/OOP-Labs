@@ -101,6 +101,14 @@ TEST(test_01, diff_test) {
     ASSERT_TRUE(c1 == d1);
 }
 
+TEST(test_08, diff_test) {
+    Seven a1 ("10000");
+    Seven b1 ("1");
+    Seven c1 = a1 - b1;
+    Seven d1("6666");
+    ASSERT_TRUE(c1 == d1);
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

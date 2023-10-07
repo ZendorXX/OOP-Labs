@@ -159,22 +159,15 @@ void Seven::resize(size_t new_size) {
 Seven Seven::operator +(Seven &other) {
     size_t max_size = this->_size > other._size ? this->_size : other._size;
     Seven tmp(max_size, '0');
-    unsigned int sum_of_digits = 0, rem = 0, digit_of_this, digit_of_other;
+    unsigned int rem = 0, digit_of_this = 0, digit_of_other = 0;
 
     for (size_t i = 0; i < max_size; ++i) {
-        digit_of_this = 0;
-        digit_of_other = 0;
+        digit_of_this = i < this->_size ? int(this->_array[i]) - 48 : 0;
+        digit_of_other = i < other._size ? int(other._array[i]) - 48 : 0;
 
-        if (i < this->_size) {
-            digit_of_this = int(this->_array[i]) - 48;
-        }
-        if (i < other._size) {
-            digit_of_other = int(other._array[i]) - 48;
-        }
-
-        sum_of_digits = digit_of_this + digit_of_other + rem;
-        tmp._array[i] = static_cast<char>(int(tmp._array[i]) + sum_of_digits % 7);
-        rem = sum_of_digits / 7;
+        int sum = digit_of_this + digit_of_other + rem;
+        tmp._array[i] = static_cast<char>(int(tmp._array[i]) + sum % 7);
+        rem = sum / 7;
     }
 
     if (rem != 0) {
@@ -209,28 +202,32 @@ void Seven::remove_leading_zeros() {
 }
 
 Seven Seven::operator -(Seven &other) {
+    if (other > *this) {
+        throw std::logic_error("Second number can't be greater than first number!");
+    }
+
     size_t max_size = this->_size > other._size ? this->_size : other._size;
     Seven tmp(max_size, '0');
-    unsigned int diff_of_digits = 0, rem = 0, digit_of_this, digit_of_other, pos = -1, next_pos = 1;
+    int rem = 0, digit_of_this = 0, digit_of_other = 0;
 
     for (size_t i = 0; i < max_size; ++i) {
-        digit_of_this = 0;
-        digit_of_other = 0;
+        digit_of_this = i < this->_size ? int(this->_array[i]) - 48 : 0;
+        digit_of_other = i < other._size ? int(other._array[i]) - 48 : 0;
 
-        if (i < this->_size) {
-            digit_of_this = int(this->_array[i]) - 48;
-        }
-        if (i < other._size) {
-            digit_of_other = int(other._array[i]) - 48;
+        if (rem > 0) {
+            digit_of_this -= rem;
         }
 
-        if (digit_of_this < digit_of_other) {
-            pos = i;
+        int diff = digit_of_this - digit_of_other;
+
+        if (diff < 0) {
+            rem = 1;
+            diff += 7;
         } 
-
-        diff_of_digits = digit_of_this + (i == pos ? 7 : 0) + (i == next_pos ? -1 : 0) - digit_of_other;
-        tmp._array[i] = static_cast<char>(int(tmp._array[i]) + diff_of_digits);
-        next_pos = pos + 1;
+        else {
+            rem = 0;
+        }
+        tmp._array[i] = static_cast<char>(int(tmp._array[i]) + diff);
     }
 
     tmp.remove_leading_zeros();
@@ -249,9 +246,8 @@ Seven Seven::diff(Seven &other) {
 }
 
 Seven::~Seven() noexcept {
-    if (_size > 0) {
-        _size = 0;
-        delete[] _array;
-        _array = nullptr;
+    this->_size = 0;
+    if (this->_array != nullptr) {
+        delete[] this->_array;
     }
 }
