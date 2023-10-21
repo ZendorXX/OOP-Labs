@@ -38,9 +38,12 @@ public:
     friend std::ostream& operator << (std::ostream& out, Figure const &T);
     friend std::istream& operator >> (std::istream& in, Figure &T);
 
-    virtual void validation() = 0;
-
     Figure& operator = (Figure const &other);
+
+    bool operator == (Figure const &other) const noexcept;
+    bool operator != (Figure const &other) const noexcept;
+
+    virtual void validation() = 0;
 
     void sort_vertices() const noexcept;
     Point2D geometrical_center() const noexcept;

@@ -36,16 +36,3 @@ void Octagon::validation() {
     }
     
 }
-
-bool Octagon::operator == (Octagon &other) {
-    for (int i = 0; i < cnt_vertices - 1; ++i) {
-        if (vertices[i].distance_to(vertices[i + 1]) != other.vertices[i].distance_to(other.vertices[i + 1])) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Octagon::operator != (Octagon &other) {
-    return !(*this == other);
-}

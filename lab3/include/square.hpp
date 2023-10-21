@@ -12,9 +12,6 @@ public:
     void print(std::ostream &out) const override;
 
     void validation() override;
-
-    bool operator == (Square &other);
-    bool operator != (Square &other);
 };
 
 #endif

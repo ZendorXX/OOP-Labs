@@ -34,14 +34,3 @@ void Square::validation() {
         throw std::logic_error("Square with these vertices doesn't exsist!");
     }
 }
-
-bool Square::operator == (Square &other) {
-    if (vertices[0].distance_to(vertices[1]) == other.vertices[0].distance_to(other.vertices[1])) {
-        return true;
-    }
-    return false;
-}
-
-bool Square::operator != (Square &other) {
-    return !(*this == other);
-}

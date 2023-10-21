@@ -12,9 +12,6 @@ public:
     void print(std::ostream &out) const override;
 
     void validation() override;
-
-    bool operator == (Triangle &other);
-    bool operator != (Triangle &other);
 };
 
 #endif

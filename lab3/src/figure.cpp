@@ -94,3 +94,16 @@ Figure::operator double() const noexcept {
     }
     return fabs(left_sum - right_sum) / 2;
 }
+
+bool Figure::operator == (Figure const &other) const noexcept {
+    for (int i = 0; i < cnt_vertices - 1; ++i) {
+        if (vertices[i].distance_to(vertices[i + 1]) != other.vertices[i].distance_to(other.vertices[i + 1])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Figure::operator != (Figure const &other) const noexcept {
+    return !(*this == other);
+}

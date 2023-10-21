@@ -13,7 +13,8 @@ void menu() {
               << "      4 to print total area" << std::endl
               << "      5 to print size of figures array" << std::endl
               << "      6 to print figures array" << std::endl 
-              << "      7 to delete element in figures array by index" << std::endl;
+              << "      7 to delete element in figures array by index" << std::endl
+              << "      8 to check if two figures are equal" << std::endl;
 }
 
 int main() {
@@ -98,7 +99,7 @@ int main() {
         }
         else if (cmd == 7) {
             std::cout << "Print index of element which should be deleted: ";
-            int del_index;
+            size_t del_index;
             std::cin >> del_index;
             if (del_index >= size and del_index < 0) {
                 std::cout << std::endl << "There is no element with given index. Try again." << std::endl;
@@ -111,6 +112,22 @@ int main() {
             }
             delete arr[size - 1];
             --size;
+        }
+        else if (cmd == 8) {
+            size_t first_index, second_index;
+            std::cout << "Print index of first element: ";
+            std::cin >> first_index;
+            std::cout << "Print index of second element: ";
+            std::cin >> second_index;
+            std::cout << std::endl;
+            if (*arr[first_index] == *arr[second_index]) {
+                std::cout << "Figures at indexes " << first_index << " and " << second_index 
+                          << " are equal" << std::endl;
+            }
+            else {
+                std::cout << "Figures at indexes " << first_index << " and " << second_index 
+                          << " are not equal" << std::endl;
+            }
         }
         else { 
             std::cout << "Invalid cmd. Please, try again." << std::endl;

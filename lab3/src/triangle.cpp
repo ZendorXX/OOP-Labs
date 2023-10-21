@@ -32,16 +32,3 @@ void Triangle::validation() {
         throw std::logic_error("Triangle with these vertices doesn't exsist!");
     }
 }
-
-bool Triangle::operator == (Triangle &other) {
-     for (int i = 0; i < cnt_vertices - 1; ++i) {
-        if (vertices[i].distance_to(vertices[i + 1]) != other.vertices[i].distance_to(other.vertices[i + 1])) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Triangle::operator != (Triangle &other) {
-    return !(*this == other);
-}

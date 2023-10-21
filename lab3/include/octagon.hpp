@@ -12,9 +12,6 @@ public:
     void print(std::ostream &out) const override;
 
     void validation() override;
-
-    bool operator == (Octagon &other);
-    bool operator != (Octagon &other);
 };
 
 #endif
