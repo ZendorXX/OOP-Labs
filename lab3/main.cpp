@@ -44,30 +44,42 @@ int main() {
                 arr = (Figure**)realloc(arr, capacity * sizeof(Figure*));
             }
 
+            bool is_valid = true;
+            Figure* tmp;
             if (cmd == 1) {
                 arr[size - 1] = new Triangle();
+                tmp = new Triangle();
             }
             else if (cmd == 2) {
                 arr[size - 1] = new Square();
+                tmp = new Square();
             }
             else if (cmd == 3) {
                 arr[size - 1] = new Octagon();
+                tmp = new Octagon();
             }
 
             try {
-                std::cin >> *arr[size - 1];
+                std::cin >> *tmp;
             }
             catch (std::logic_error &l_ex) {
                 std::cout << "exepction: " << l_ex.what() << std::endl;
+                is_valid = false;
+                --size;
             }
 
-            double curr_area = double(*arr[size - 1]);
-            total_area += curr_area;
-            
-            std::cout << *arr[size - 1] 
-                    << "Center: " << arr[size - 1]->geometrical_center() << std::endl 
-                    << "Area: " << curr_area << std::endl 
-                    << std::endl;
+            if (is_valid) {
+                *arr[size - 1] = *tmp;
+                double curr_area = double(*arr[size - 1]);
+                total_area += curr_area;
+                
+                std::cout << *arr[size - 1] 
+                        << "Center: " << arr[size - 1]->geometrical_center() << std::endl 
+                        << "Area: " << curr_area << std::endl 
+                        << std::endl;
+            }
+
+            delete tmp;
         }
         else if (cmd == 4) {
             std::cout << "Total area: " << total_area << std::endl;
