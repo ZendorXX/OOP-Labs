@@ -75,3 +75,22 @@ void Figure::sort_vertices() const noexcept {
     }
 }
 
+Figure::Point2D Figure::geometrical_center() const noexcept {
+    Point2D center;
+    for (int i = 0; i < cnt_vertices; ++i) {
+        center.x += vertices[i].x;
+        center.y += vertices[i].y;
+    }
+    center.x /= cnt_vertices;
+    center.y /= cnt_vertices;
+    return center;
+}
+
+Figure::operator double() const noexcept {
+    double left_sum = 0, right_sum = 0;
+    for (int i = 0; i < cnt_vertices; ++i) {
+        left_sum += vertices[i % cnt_vertices].x * vertices[(i + 1) % cnt_vertices].y;
+        right_sum += vertices[(i + 1) % cnt_vertices].x * vertices[i % cnt_vertices].y;
+    }
+    return fabs(left_sum - right_sum) / 2;
+}

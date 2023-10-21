@@ -1,16 +1,4 @@
 #include "octagon.hpp"
-#include <algorithm>
-
-/*bool cmp_for_bypass (Figure::Point2D const &a, Figure::Point2D const &b) {
-    return a.vect(b) > 0;
-}*/
-
-/*bool cmp (Figure::Point2D const &a, Figure::Point2D const &b) {
-    if (a.y != b.y) {
-        return a.y < b.y;
-    }
-    return a.x < b.x;
-}*/
 
 Octagon::Octagon() : Figure(8) {
     vertices[0] = {0, 0};
@@ -37,26 +25,6 @@ void Octagon::print(std::ostream &out) const {
     for (int i = 0; i < cnt_vertices; ++i) {
         out << " " << i + 1 << " point: " << vertices[i] << std::endl;
     }
-}
-
-Octagon::operator double() const noexcept {
-    double left_sum = 0, right_sum = 0;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        left_sum += vertices[i % cnt_vertices].x * vertices[(i + 1) % cnt_vertices].y;
-        right_sum += vertices[(i + 1) % cnt_vertices].x * vertices[i % cnt_vertices].y;
-    }
-    return fabs(left_sum - right_sum) / 2;
-}
-
-Figure::Point2D Octagon::geometrical_center() const noexcept {
-    Point2D center;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        center.x += vertices[i].x;
-        center.y += vertices[i].y;
-    }
-    center.x /= cnt_vertices;
-    center.y /= cnt_vertices;
-    return center;
 }
 
 void Octagon::validation() {

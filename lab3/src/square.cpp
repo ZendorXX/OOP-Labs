@@ -25,21 +25,6 @@ void Square::print(std::ostream &out) const {
     }
 }
 
-Square::operator double() const noexcept {
-    return vertices[0].distance_to(vertices[1]) * vertices[0].distance_to(vertices[1]);
-}
-
-Figure::Point2D Square::geometrical_center() const noexcept {
-    Point2D center;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        center.x += vertices[i].x;
-        center.y += vertices[i].y;
-    }
-    center.x /= cnt_vertices;
-    center.y /= cnt_vertices;
-    return center;
-}
-
 void Square::validation() {
     double AB = vertices[0].distance_to(vertices[1]);
     double AC = vertices[0].distance_to(vertices[2]);

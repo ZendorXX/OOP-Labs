@@ -23,24 +23,6 @@ void Triangle::print(std::ostream &out) const {
     }
 }
 
-Triangle::operator double() const noexcept {
-    return fabs(
-        (vertices[1].x - vertices[0].x) * (vertices[2].y - vertices[0].y) - 
-        (vertices[2].x - vertices[0].x) * (vertices[1].y - vertices[0].y)
-        ) / 2;
-}
-
-Figure::Point2D Triangle::geometrical_center() const noexcept {
-    Point2D center;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        center.x += vertices[i].x;
-        center.y += vertices[i].y;
-    }
-    center.x /= cnt_vertices;
-    center.y /= cnt_vertices;
-    return center;
-}
-
 void Triangle::validation() {
     double AB = vertices[0].distance_to(vertices[1]);
     double BC = vertices[1].distance_to(vertices[2]);

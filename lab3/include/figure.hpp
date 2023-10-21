@@ -38,13 +38,13 @@ public:
     friend std::ostream& operator << (std::ostream& out, Figure const &T);
     friend std::istream& operator >> (std::istream& in, Figure &T);
 
-    explicit virtual operator double() const noexcept = 0;
-    virtual Point2D geometrical_center() const noexcept = 0;
     virtual void validation() = 0;
 
     Figure& operator = (Figure const &other);
 
     void sort_vertices() const noexcept;
+    Point2D geometrical_center() const noexcept;
+    explicit operator double() const noexcept;
 };
 
 #endif
