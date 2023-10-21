@@ -1,16 +1,12 @@
 #include "square.hpp"
 #include <algorithm>
 
-/*bool cmp (Figure::Point2D const &a, Figure::Point2D const &b) {
-    return (a.x * b.y - a.y * b.x) > 0;
-}*/
-
 Square::Square() : Figure(4) {
     vertices[0] = {0, 0};
     vertices[1] = {1, 0};
     vertices[2] = {1, 1};
     vertices[3] = {0, 1};
-    //std::sort(vertices, vertices + cnt_vertices, cmp);
+    sort_vertices();
     validation();
 }
 
@@ -18,18 +14,7 @@ void Square::input(std::istream &in) {
     for (int i = 0; i < cnt_vertices; ++i) {
         in >> vertices[i];
     }
-
-    double move_x = vertices[0].x, move_y = vertices[0].y;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        vertices[i].x -= move_x;
-        vertices[i].y -= move_y;
-    }
-    //std::sort(vertices, vertices + cnt_vertices, cmp);
-    for (int i = 0; i < cnt_vertices; ++i) {
-        vertices[i].x += move_x;
-        vertices[i].y += move_y;
-    }
-    
+    sort_vertices();
     validation();
 }
 

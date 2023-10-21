@@ -1,7 +1,4 @@
-// 8-угольник
-
 #include <iostream>
-#include <cmath>
 
 #include "figure.hpp"
 #include "square.hpp"
@@ -75,8 +72,7 @@ int main() {
                 
                 std::cout << *arr[size - 1] 
                         << "Center: " << arr[size - 1]->geometrical_center() << std::endl 
-                        << "Area: " << curr_area << std::endl 
-                        << std::endl;
+                        << "Area: " << curr_area << std::endl;
             }
 
             delete tmp;
@@ -122,7 +118,6 @@ int main() {
         std::cout << std::endl;
         menu();
     }
-
 
     for (int i = 0; i < size; ++i) {
         free(arr[i]);

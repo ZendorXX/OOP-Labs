@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "figure.hpp"
 
 Figure::Figure(int cnt) {
@@ -48,3 +49,29 @@ Figure& Figure::operator = (Figure const &other) {
     }
     return *this;
 }
+
+bool cmp (Figure::Point2D const &a, Figure::Point2D const &b) {
+    if (a.y != b.y) {
+        return a.y < b.y;
+    }
+    return a.x < b.x;
+}
+
+bool cmp_for_traversal (Figure::Point2D const &a, Figure::Point2D const &b) {
+    return a.vect(b) > 0;
+}
+
+void Figure::sort_vertices() const noexcept {
+    std::sort(vertices, vertices + cnt_vertices, cmp);
+    double move_x = vertices[0].x, move_y = vertices[0].y;
+    for (int i = 0; i < cnt_vertices; ++i) {
+        vertices[i].x -= move_x;
+        vertices[i].y -= move_y;
+    }
+    std::sort(vertices, vertices + cnt_vertices, cmp_for_traversal);
+    for (int i = 0; i < cnt_vertices; ++i) {
+        vertices[i].x += move_x;
+        vertices[i].y += move_y;
+    }
+}
+

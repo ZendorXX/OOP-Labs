@@ -1,16 +1,16 @@
 #include "octagon.hpp"
 #include <algorithm>
 
-bool cmp (Figure::Point2D const &a, Figure::Point2D const &b) {
-    return (a.x * b.y - a.y * b.x) > 0;
-}
+/*bool cmp_for_bypass (Figure::Point2D const &a, Figure::Point2D const &b) {
+    return a.vect(b) > 0;
+}*/
 
-bool cmp2 (Figure::Point2D const &a, Figure::Point2D const &b) {
+/*bool cmp (Figure::Point2D const &a, Figure::Point2D const &b) {
     if (a.y != b.y) {
         return a.y < b.y;
     }
     return a.x < b.x;
-}
+}*/
 
 Octagon::Octagon() : Figure(8) {
     vertices[0] = {0, 0};
@@ -28,17 +28,7 @@ void Octagon::input(std::istream &in) {
     for (int i = 0; i < cnt_vertices; ++i) {
         in >> vertices[i];
     }
-    std::sort(vertices, vertices + cnt_vertices, cmp2);
-    double move_x = vertices[0].x, move_y = vertices[0].y;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        vertices[i].x -= move_x;
-        vertices[i].y -= move_y;
-    }
-    std::sort(vertices, vertices + cnt_vertices, cmp);
-    for (int i = 0; i < cnt_vertices; ++i) {
-        vertices[i].x += move_x;
-        vertices[i].y += move_y;
-    }
+    sort_vertices();
     validation();
 }
 

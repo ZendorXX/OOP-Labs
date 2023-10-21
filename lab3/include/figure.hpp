@@ -43,6 +43,8 @@ public:
     virtual void validation() = 0;
 
     Figure& operator = (Figure const &other);
+
+    void sort_vertices() const noexcept;
 };
 
 #endif

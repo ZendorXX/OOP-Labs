@@ -14,6 +14,7 @@ public:
     explicit operator double() const noexcept override;
     Point2D geometrical_center() const noexcept override;
 
+    //void sort_vertices();
     void validation() override;
 
     bool operator == (Octagon &other);
