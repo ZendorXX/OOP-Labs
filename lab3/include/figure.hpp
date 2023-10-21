@@ -21,8 +21,14 @@ public:
         double vect (Point2D const &other) const;
     };
 
+protected:
+    int cnt_vertices = -1;
+    Point2D* vertices;
+
 public:
-    virtual ~Figure() noexcept = default;
+    Figure() = default;
+    Figure(int cnt);    
+    virtual ~Figure() noexcept;
 
 protected:
     virtual void print(std::ostream& out) const = 0;
@@ -35,6 +41,8 @@ public:
     explicit virtual operator double() const noexcept = 0;
     virtual Point2D geometrical_center() const noexcept = 0;
     virtual void validation() = 0;
+
+    Figure& operator = (Figure const &other);
 };
 
 #endif

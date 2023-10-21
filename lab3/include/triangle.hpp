@@ -4,10 +4,6 @@
 #include "figure.hpp"
 
 class Triangle final: public Figure {
-private:
-    int cnt_vertices = 3;
-    Point2D vertices[3];
-
 public:
     explicit Triangle();
 

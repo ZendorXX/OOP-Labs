@@ -12,7 +12,7 @@ bool cmp2 (Figure::Point2D const &a, Figure::Point2D const &b) {
     return a.x < b.x;
 }
 
-Octagon::Octagon() {
+Octagon::Octagon() : Figure(8) {
     vertices[0] = {0, 0};
     vertices[1] = {1, 0};
     vertices[2] = {2, 1};

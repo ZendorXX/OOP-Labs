@@ -4,10 +4,6 @@
 #include "figure.hpp"
 
 class Square final : public Figure {
-private:
-    int cnt_vertices = 4;
-    Point2D vertices[4];
-
 public:
     explicit Square();
 

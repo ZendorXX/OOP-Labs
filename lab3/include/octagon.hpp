@@ -4,10 +4,6 @@
 #include "figure.hpp"
 
 class Octagon final : public Figure {
-private:
-    int cnt_vertices = 8;
-    Point2D vertices[8];
-
 public:
     explicit Octagon();
 

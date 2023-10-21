@@ -92,8 +92,14 @@ int main() {
             std::cout << "Print index of element which should be deleted: ";
             int del_index;
             std::cin >> del_index;
+            if (del_index >= size and del_index < 0) {
+                std::cout << std::endl << "There is no element with given index. Try again." << std::endl;
+                std::cout << std::endl;
+                menu();
+                continue;
+            }
             for (int i = del_index; i < size - 1; ++i) {
-                arr[i] = arr[i + 1]; // TODO
+                *arr[i] = *arr[i + 1];
             }
             delete arr[size - 1];
             --size;

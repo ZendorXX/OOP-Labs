@@ -1,6 +1,6 @@
 #include "triangle.hpp"
 
-Triangle::Triangle() {
+Triangle::Triangle() : Figure(3) {
     vertices[0] = {0, 0};
     vertices[1] = {3, 0};
     vertices[2] = {0, 4};

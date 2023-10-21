@@ -5,7 +5,7 @@
     return (a.x * b.y - a.y * b.x) > 0;
 }*/
 
-Square::Square() {
+Square::Square() : Figure(4) {
     vertices[0] = {0, 0};
     vertices[1] = {1, 0};
     vertices[2] = {1, 1};
