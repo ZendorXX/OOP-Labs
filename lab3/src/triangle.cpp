@@ -8,6 +8,14 @@ Triangle::Triangle() : Figure(3) {
     validation();
 }
 
+Triangle::Triangle(Point2D *points) : Figure(3) {
+    for (int i = 0; i < cnt_vertices; ++i) {
+        vertices[i] = points[i];
+    }
+    sort_vertices();
+    validation();
+}
+
 void Triangle::input(std::istream &in) {
     for (int i = 0; i < cnt_vertices; ++i) {
         in >> vertices[i];

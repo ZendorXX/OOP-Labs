@@ -19,6 +19,9 @@ public:
         double distance_to (Point2D const &other) const;
 
         double vect (Point2D const &other) const;
+
+        bool operator == (Point2D const &other) const noexcept;
+        bool operator != (Point2D const &other) const noexcept;
     };
 
 protected:

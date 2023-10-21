@@ -10,6 +10,14 @@ Square::Square() : Figure(4) {
     validation();
 }
 
+Square::Square(Point2D *points) : Figure(4) {
+    for (int i = 0; i < cnt_vertices; ++i) {
+        vertices[i] = points[i];
+    }
+    sort_vertices();
+    validation();
+}
+
 void Square::input(std::istream &in) {
     for (int i = 0; i < cnt_vertices; ++i) {
         in >> vertices[i];

@@ -28,6 +28,17 @@ double Figure::Point2D::vect (Figure::Point2D const &other) const {
     return x * other.y - y * other.x;
 }
 
+bool Figure::Point2D::operator == (Figure::Point2D const &other) const noexcept {
+    if (x - other.x < eps and y - other.y < eps) {
+        return true;
+    }
+    return false;
+}
+
+bool Figure::Point2D::operator != (Figure::Point2D const &other) const noexcept {
+    return !(*this == other);
+}
+
 std::ostream& operator << (std::ostream& out, Figure const &T) {
     T.print(out);
     return out;

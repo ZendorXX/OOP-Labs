@@ -12,6 +12,14 @@ Octagon::Octagon() : Figure(8) {
     validation();
 }
 
+Octagon::Octagon(Point2D *points) : Figure(8) {
+    for (int i = 0; i < cnt_vertices; ++i) {
+        vertices[i] = points[i];
+    }
+    sort_vertices();
+    validation();
+}
+
 void Octagon::input(std::istream &in) {
     for (int i = 0; i < cnt_vertices; ++i) {
         in >> vertices[i];
