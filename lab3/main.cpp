@@ -21,7 +21,11 @@ int main() {
     size_t size = 0;
     int capacity = 1;
     Figure** arr = (Figure**)malloc(sizeof(Figure*));
-    
+    if (arr == NULL) {
+        std::cout << "Not enough memory!" << std::endl;
+        return -1;
+    }
+     
     menu();
 
     int cmd;
@@ -29,7 +33,7 @@ int main() {
     while (std::cin >> cmd) {
         if (cmd == 0) {
             for (int i = 0; i < size; ++i) {
-                free(arr[i]);
+                delete arr[i];
             }
             free(arr);
             return 0;
@@ -39,7 +43,14 @@ int main() {
 
             if (size >= capacity) {
                 capacity *= 2;
-                arr = (Figure**)realloc(arr, capacity * sizeof(Figure*));
+                
+                Figure** tmp_arr = (Figure**)realloc(arr, capacity * sizeof(Figure*));
+                if (tmp_arr != NULL) {
+                    arr = tmp_arr;
+                } else {
+                    std::cout << "Not enough memory!" << std::endl;
+                    return -1;
+                }
             }
 
             bool is_valid = true;
@@ -137,7 +148,7 @@ int main() {
     }
 
     for (int i = 0; i < size; ++i) {
-        free(arr[i]);
+        delete(arr[i]);
     }
     free(arr);
 

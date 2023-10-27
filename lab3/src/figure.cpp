@@ -29,7 +29,7 @@ double Figure::Point2D::vect (Figure::Point2D const &other) const {
 }
 
 bool Figure::Point2D::operator == (Figure::Point2D const &other) const noexcept {
-    if (x - other.x < eps and y - other.y < eps) {
+    if (fabs(x - other.x) < eps and fabs(y - other.y) < eps) {
         return true;
     }
     return false;
