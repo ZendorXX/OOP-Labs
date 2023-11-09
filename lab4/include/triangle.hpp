@@ -3,7 +3,7 @@
 
 #include "figure.hpp"
 
-class Triangle final: public Figure {
+class Triangle final: public Figure<double> {
 public:
     explicit Triangle();
     explicit Triangle(Point2D<double> *poitns);

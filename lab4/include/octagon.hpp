@@ -3,7 +3,7 @@
 
 #include "figure.hpp"
 
-class Octagon final : public Figure {
+class Octagon final : public Figure<double> {
 public:
     explicit Octagon();
     explicit Octagon(Point2D<double> *poitns);

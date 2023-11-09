@@ -3,7 +3,7 @@
 
 #include "figure.hpp"
 
-class Square final : public Figure {
+class Square final : public Figure<double> {
 public:
     explicit Square();
     explicit Square(Point2D<double> *poitns);
