@@ -9,7 +9,7 @@
 class Figure {
 protected:
     int cnt_vertices = -1;
-    Point2D* vertices;
+    Point2D<double>* vertices;
 
 public:
     Figure() = default;
@@ -37,18 +37,18 @@ public:
     virtual void validation() = 0;
 
     void sort_vertices() const noexcept;
-    Point2D geometrical_center() const noexcept;
+    Point2D<double> geometrical_center() const noexcept;
     explicit operator double() const noexcept;
 };
 
 Figure::Figure(int cnt) {
     cnt_vertices = cnt;
-    vertices = new Point2D[cnt_vertices];
+    vertices = new Point2D<double>[cnt_vertices];
 }
 
 Figure::Figure(Figure const &other) {
     cnt_vertices = other.cnt_vertices;
-    vertices = new Point2D[cnt_vertices];
+    vertices = new Point2D<double>[cnt_vertices];
     for (size_t i = 0; i < cnt_vertices; ++i) {
         vertices[i] = other.vertices[i];
     }
@@ -82,7 +82,7 @@ Figure& Figure::operator = (Figure const &other) {
     }
     delete[] vertices;
     cnt_vertices = other.cnt_vertices;
-    vertices = new Point2D[cnt_vertices];
+    vertices = new Point2D<double>[cnt_vertices];
     for (int i = 0; i < cnt_vertices; ++i) {
         vertices[i] = other.vertices[i];
     }
@@ -108,14 +108,14 @@ Figure& Figure::operator = (Figure &&other) noexcept {
     return *this;
 }
 
-bool cmp (Point2D const &a, Point2D const &b) {
+bool cmp (Point2D<double> const &a, Point2D<double> const &b) {
     if (a.y != b.y) {
         return a.y < b.y;
     }
     return a.x < b.x;
 }
 
-bool cmp_for_traversal (Point2D const &a, Point2D const &b) {
+bool cmp_for_traversal (Point2D<double> const &a, Point2D<double> const &b) {
     return a.vect(b) > 0;
 }
 
@@ -133,8 +133,8 @@ void Figure::sort_vertices() const noexcept {
     }
 }
 
-Point2D Figure::geometrical_center() const noexcept {
-    Point2D center;
+Point2D<double> Figure::geometrical_center() const noexcept {
+    Point2D<double> center;
     for (int i = 0; i < cnt_vertices; ++i) {
         center.x += vertices[i].x;
         center.y += vertices[i].y;

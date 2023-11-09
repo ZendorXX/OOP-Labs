@@ -6,7 +6,7 @@
 class Square final : public Figure {
 public:
     explicit Square();
-    explicit Square(Point2D *poitns);
+    explicit Square(Point2D<double> *poitns);
 public:
     void input(std::istream &in) override;
     void print(std::ostream &out) const override;
@@ -23,7 +23,7 @@ Square::Square() : Figure(4) {
     validation();
 }
 
-Square::Square(Point2D *points) : Figure(4) {
+Square::Square(Point2D<double> *points) : Figure(4) {
     for (int i = 0; i < cnt_vertices; ++i) {
         vertices[i] = points[i];
     }

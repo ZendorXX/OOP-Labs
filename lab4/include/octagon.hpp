@@ -6,7 +6,7 @@
 class Octagon final : public Figure {
 public:
     explicit Octagon();
-    explicit Octagon(Point2D *poitns);
+    explicit Octagon(Point2D<double> *poitns);
 public:
     void input(std::istream &in) override;
     void print(std::ostream &out) const override;
@@ -26,7 +26,7 @@ Octagon::Octagon() : Figure(8) {
     validation();
 }
 
-Octagon::Octagon(Point2D *points) : Figure(8) {
+Octagon::Octagon(Point2D<double> *points) : Figure(8) {
     for (int i = 0; i < cnt_vertices; ++i) {
         vertices[i] = points[i];
     }

@@ -6,7 +6,7 @@
 class Triangle final: public Figure {
 public:
     explicit Triangle();
-    explicit Triangle(Point2D *poitns);
+    explicit Triangle(Point2D<double> *poitns);
 public:
     void input(std::istream &in) override;
     void print(std::ostream &out) const override;
@@ -22,7 +22,7 @@ Triangle::Triangle() : Figure(3) {
     validation();
 }
 
-Triangle::Triangle(Point2D *points) : Figure(3) {
+Triangle::Triangle(Point2D<double> *points) : Figure(3) {
     for (int i = 0; i < cnt_vertices; ++i) {
         vertices[i] = points[i];
     }
