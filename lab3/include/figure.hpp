@@ -30,6 +30,10 @@ protected:
 
 public:
     Figure() = default;
+
+    Figure(Figure const &other);
+    Figure(Figure &&other) noexcept;
+
     Figure(int cnt);    
     virtual ~Figure() noexcept;
 
@@ -42,6 +46,7 @@ public:
     friend std::istream& operator >> (std::istream& in, Figure &T);
 
     Figure& operator = (Figure const &other);
+    Figure& operator = (Figure &&other) noexcept;
 
     bool operator == (Figure const &other) const noexcept;
     bool operator != (Figure const &other) const noexcept;

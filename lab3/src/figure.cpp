@@ -6,6 +6,22 @@ Figure::Figure(int cnt) {
     vertices = new Point2D[cnt_vertices];
 }
 
+Figure::Figure(Figure const &other) {
+    cnt_vertices = other.cnt_vertices;
+    vertices = new Point2D[cnt_vertices];
+    for (size_t i = 0; i < cnt_vertices; ++i) {
+        vertices[i] = other.vertices[i];
+    }
+}
+
+Figure::Figure(Figure &&other) noexcept {
+    cnt_vertices = other.cnt_vertices;
+    vertices = other.vertices;
+
+    other.cnt_vertices = -1;
+    other.vertices = nullptr;
+}
+
 Figure::~Figure() noexcept {
     delete[] vertices;
 }
@@ -49,6 +65,7 @@ std::istream& operator >> (std::istream& in, Figure &T) {
 }
 
 Figure& Figure::operator = (Figure const &other) {
+    std::cout << "copy assignment\n";
     if (this == &other) {
         return *this;
     }
@@ -58,6 +75,25 @@ Figure& Figure::operator = (Figure const &other) {
     for (int i = 0; i < cnt_vertices; ++i) {
         vertices[i] = other.vertices[i];
     }
+    return *this;
+}
+
+Figure& Figure::operator = (Figure &&other) noexcept {
+    std::cout << "move assignment\n";
+    if (this == &other) {
+        return *this;
+    }
+    
+    if (vertices != nullptr) {
+        delete[] vertices;
+    }
+
+    cnt_vertices = other.cnt_vertices;
+    vertices = other.vertices;
+
+    other.cnt_vertices = -1;
+    other.vertices = nullptr;
+
     return *this;
 }
 
