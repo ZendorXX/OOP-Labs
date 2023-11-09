@@ -1,30 +1,12 @@
 #ifndef FIGURE_HPP
 #define FIGURE_HPP
 
-#include <iostream>
-#include <cmath>
 #include <algorithm>
+#include <memory>
 
-#define eps 1e-9
+#include "point.hpp"
 
 class Figure {
-public:
-    struct Point2D
-    {
-        double x;
-        double y;
-
-        friend std::istream& operator >> (std::istream& in, Point2D &T);
-        friend std::ostream& operator << (std::ostream& out, Point2D const &T);
-
-        double distance_to (Point2D const &other) const;
-
-        double vect (Point2D const &other) const;
-
-        bool operator == (Point2D const &other) const noexcept;
-        bool operator != (Point2D const &other) const noexcept;
-    };
-
 protected:
     int cnt_vertices = -1;
     Point2D* vertices;
@@ -84,35 +66,6 @@ Figure::~Figure() noexcept {
     delete[] vertices;
 }
 
-std::istream& operator >> (std::istream& in, Figure::Point2D &T) {
-    in >> T.x >> T.y;
-    return in;
-}
-
-std::ostream& operator << (std::ostream& out, Figure::Point2D const &T)  {
-    out << "(" << T.x << ", " << T.y << ")";
-    return out;
-}
-
-double Figure::Point2D::distance_to (Figure::Point2D const &other) const {
-    return sqrt((other.x - x) * (other.x - x) + (other.y - y) * (other.y - y));
-}
-
-double Figure::Point2D::vect (Figure::Point2D const &other) const {
-    return x * other.y - y * other.x;
-}
-
-bool Figure::Point2D::operator == (Figure::Point2D const &other) const noexcept {
-    if (fabs(x - other.x) < eps and fabs(y - other.y) < eps) {
-        return true;
-    }
-    return false;
-}
-
-bool Figure::Point2D::operator != (Figure::Point2D const &other) const noexcept {
-    return !(*this == other);
-}
-
 std::ostream& operator << (std::ostream& out, Figure const &T) {
     T.print(out);
     return out;
@@ -155,14 +108,14 @@ Figure& Figure::operator = (Figure &&other) noexcept {
     return *this;
 }
 
-bool cmp (Figure::Point2D const &a, Figure::Point2D const &b) {
+bool cmp (Point2D const &a, Point2D const &b) {
     if (a.y != b.y) {
         return a.y < b.y;
     }
     return a.x < b.x;
 }
 
-bool cmp_for_traversal (Figure::Point2D const &a, Figure::Point2D const &b) {
+bool cmp_for_traversal (Point2D const &a, Point2D const &b) {
     return a.vect(b) > 0;
 }
 
@@ -180,7 +133,7 @@ void Figure::sort_vertices() const noexcept {
     }
 }
 
-Figure::Point2D Figure::geometrical_center() const noexcept {
+Point2D Figure::geometrical_center() const noexcept {
     Point2D center;
     for (int i = 0; i < cnt_vertices; ++i) {
         center.x += vertices[i].x;
