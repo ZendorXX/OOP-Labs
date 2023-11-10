@@ -18,9 +18,30 @@ void menu() {
 
 int main() {
     int cmd;
-    Array figures;
+    int cnt;
+    std::cin >> cnt;
+    Array<std::shared_ptr<Figure<double>>> figures(cnt);
 
-    do {
+    for (int i = 0; i < cnt; ++i) {
+        std::cin >> cmd;
+        std::shared_ptr< Figure<double> > tmp;
+        if (cmd == 1) { tmp = std::make_shared< Triangle<double> > (); }
+        else if (cmd == 2) { tmp = std::make_shared< Square<double> > (); }
+        else if (cmd == 3) { tmp = std::make_shared< Octagon<double> >(); }
+
+        try {
+            std::cin >> *tmp;
+        }
+        catch (std::logic_error &l_ex) {
+            std::cout << "exepction: " << l_ex.what() << std::endl;
+        }
+
+        figures.input_figure(cmd, tmp);
+    }
+
+    figures.print_figures();
+
+    /*do {
         menu();
 
         std::cin >> cmd;
@@ -29,7 +50,22 @@ int main() {
             break;
         }
         else if (cmd == 1 or cmd == 2 or cmd == 3) {
-           figures.input_figure(cmd);
+            Figure<double>* tmp;
+            if (cmd == 1) { tmp = new Triangle(); }
+            else if (cmd == 2) { tmp = new Square(); }
+            else if (cmd == 3) { tmp = new Octagon(); }
+
+            try {
+                std::cin >> *tmp;
+            }
+            catch (std::logic_error &l_ex) {
+                std::cout << "exepction: " << l_ex.what() << std::endl;
+                delete tmp;
+            }
+
+            figures.input_figure(cmd, tmp);
+
+            delete tmp;
         }
         else if (cmd == 4) {
             figures.get_total_area();
@@ -49,7 +85,7 @@ int main() {
         else { 
             std::cout << "Invalid cmd. Please, try again." << std::endl;
         }
-    } while (cmd != 0);
+    } while (cmd != 0);*/
 
     return 0;
 }

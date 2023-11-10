@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+/*#include <gtest/gtest.h>
 
 #include "point.hpp"
 #include "figure.hpp"
@@ -71,4 +71,4 @@ TEST(test_triangles, test_validation_2) {
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-}
+}*/

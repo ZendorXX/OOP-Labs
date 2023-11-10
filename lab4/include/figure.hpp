@@ -23,14 +23,15 @@ template <class T>
 class Figure {
 protected:
     int cnt_vertices = -1;
-    Point2D<T>* vertices;
+    std::shared_ptr< Point2D<T>[] > vertices;
+    //Point2D<T>* vertices;
 
 public:
     Figure() = default;
 
     Figure(Figure const &other) {
         cnt_vertices = other.cnt_vertices;
-        vertices = new Point2D<T>[cnt_vertices];
+        vertices = std::shared_ptr< Point2D<T>[] >(new Point2D<T>[cnt_vertices]);
         for (size_t i = 0; i < cnt_vertices; ++i) {
             vertices[i] = other.vertices[i];
         }
@@ -45,11 +46,10 @@ public:
 
     Figure(int cnt) {
         cnt_vertices = cnt;
-        vertices = new Point2D<T>[cnt_vertices];
+        //vertices = new Point2D<T>[cnt_vertices];
+        vertices = std::shared_ptr< Point2D<T>[] >(new Point2D<T>[cnt_vertices]);
     }
-    virtual ~Figure() noexcept {
-        delete[] vertices;
-    }
+    virtual ~Figure() noexcept = default;
 
 protected:
     virtual void print(std::ostream& out) const = 0;
@@ -70,7 +70,6 @@ public:
         if (this == &other) {
             return *this;
         }
-        delete[] vertices;
         cnt_vertices = other.cnt_vertices;
         vertices = new Point2D<T>[cnt_vertices];
         for (int i = 0; i < cnt_vertices; ++i) {
@@ -82,10 +81,6 @@ public:
         std::cout << "move assignment\n";
         if (this == &other) {
             return *this;
-        }
-        
-        if (vertices != nullptr) {
-            delete[] vertices;
         }
 
         cnt_vertices = other.cnt_vertices;
@@ -109,7 +104,7 @@ public:
         return !(*this == other);
     }
 
-    void sort_vertices() const noexcept {
+    /*void sort_vertices() const noexcept {
         //std::sort(std::begin(vertices), std::end(vertices), cmp);
         double move_x = vertices[0].x, move_y = vertices[0].y;
         for (int i = 0; i < cnt_vertices; ++i) {
@@ -121,7 +116,7 @@ public:
             vertices[i].x += move_x;
             vertices[i].y += move_y;
         }
-    }
+    }*/
     Point2D<T> geometrical_center() const noexcept {
         Point2D<T> center;
         for (int i = 0; i < cnt_vertices; ++i) {

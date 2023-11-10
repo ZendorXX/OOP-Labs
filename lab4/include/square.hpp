@@ -3,10 +3,11 @@
 
 #include "figure.hpp"
 
-class Square final : public Figure<double> {
+template <class T>
+class Square final : public Figure<T> {
 public:
     explicit Square();
-    explicit Square(Point2D<double> *poitns);
+    explicit Square(std::shared_ptr< Point2D<T>> points);
 public:
     void input(std::istream &in) override;
     void print(std::ostream &out) const override;
@@ -14,42 +15,47 @@ public:
     void validation() override;
 };
 
-Square::Square() : Figure(4) {
-    vertices[0] = {0, 0};
-    vertices[1] = {1, 0};
-    vertices[2] = {1, 1};
-    vertices[3] = {0, 1};
-    sort_vertices();
+template <class T>
+Square<T>::Square() : Figure<T>(4) {
+    this->vertices[0] = {0, 0};
+    this->vertices[1] = {1, 0};
+    this->vertices[2] = {1, 1};
+    this->vertices[3] = {0, 1};
+    //sort_vertices();
     validation();
 }
 
-Square::Square(Point2D<double> *points) : Figure(4) {
-    for (int i = 0; i < cnt_vertices; ++i) {
-        vertices[i] = points[i];
+template <class T>
+Square<T>::Square(std::shared_ptr<Point2D<T>> points) : Figure<T>(4) {
+    for (int i = 0; i < this->cnt_vertices; ++i) {
+        this->vertices[i] = points[i];
     }
-    sort_vertices();
+    //sort_vertices();
     validation();
 }
 
-void Square::input(std::istream &in) {
-    for (int i = 0; i < cnt_vertices; ++i) {
-        in >> vertices[i];
+template <class T>
+void Square<T>::input(std::istream &in) {
+    for (int i = 0; i < this->cnt_vertices; ++i) {
+        in >> this->vertices[i];
     }
-    sort_vertices();
+    //sort_vertices();
     validation();
 }
 
-void Square::print(std::ostream &out) const {
+template <class T>
+void Square<T>::print(std::ostream &out) const {
     out << "Square:" << std::endl;
-    for (int i = 0; i < cnt_vertices; ++i) {
-        out << " " << i + 1 << " point: " << vertices[i] << std::endl;
+    for (int i = 0; i < this->cnt_vertices; ++i) {
+        out << " " << i + 1 << " point: " << this->vertices[i] << std::endl;
     }
 }
 
-void Square::validation() {
-    double AB = vertices[0].distance_to(vertices[1]);
-    double AC = vertices[0].distance_to(vertices[2]);
-    double AD = vertices[0].distance_to(vertices[3]);
+template <class T>
+void Square<T>::validation() {
+    double AB = this->vertices[0].distance_to(this->vertices[1]);
+    double AC = this->vertices[0].distance_to(this->vertices[2]);
+    double AD = this->vertices[0].distance_to(this->vertices[3]);
 
     if (!(AB - AD < eps and AC - sqrt(2) * AB < eps)) {
         throw std::logic_error("Square with these vertices doesn't exsist!");
