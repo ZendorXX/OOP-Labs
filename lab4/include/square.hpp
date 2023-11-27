@@ -58,7 +58,7 @@ void Square<T>::validation() {
     double AD = this->vertices[0].distance_to(this->vertices[3]);
 
     if (!(AB - AD < eps and AC - sqrt(2) * AB < eps)) {
-        throw std::logic_error("Square with these vertices doesn't exsist!");
+        throw std::logic_error("Square with these vertices doesn't exist!");
     }
 }
 
