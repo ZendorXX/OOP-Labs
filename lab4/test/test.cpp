@@ -1,4 +1,4 @@
-/*#include <gtest/gtest.h>
+#include <gtest/gtest.h>
 
 #include "point.hpp"
 #include "figure.hpp"
@@ -8,48 +8,48 @@
 
 TEST(test_triangles, test_area_1) {
     Point2D<double> points[3] = { {0, 0}, {3, 0}, {0, 4} };
-    Figure<double> *A = new Triangle(points);
+    std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
     ASSERT_TRUE (double(*A) == 6.0);
 }
 
 TEST(test_triangles, test_area_2) {
     Point2D<double> points[3] = { {0, 0}, {5, 0}, {0, 6} };
-    Figure<double> *A = new Triangle(points);
+    std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
     ASSERT_TRUE (double(*A) == 15.0);
 }
 
 TEST(test_triangles, test_center_1) {
     Point2D<double> points[3] = { {0, 0}, {3, 0}, {0, 4} };
-    Figure<double> *A = new Triangle(points);
+    std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
     ASSERT_TRUE (A->geometrical_center() == Point2D<double>({1, double(4) / double(3)}) );
 }
 
 TEST(test_triangles, test_center_2) {
     Point2D<double> points[3] = { {0, 0}, {5, 0}, {0, 6} };
-    Figure<double> *A = new Triangle(points);
+    std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
     ASSERT_TRUE (A->geometrical_center() == Point2D<double>({double(5) / double(3), 2}) );
 }
 
 TEST(test_triangles, test_equal_1) {
     Point2D<double> points[3] = { {0, 0}, {5, 0}, {0, 6} };
-    Point2D<double> points2[3] = { {0, 6}, {0, 0}, {5, 0} };
-    Figure<double>* A = new Triangle(points);
-    Figure<double>* B = new Triangle(points2);
+    Point2D<double> points2[3] = { {0, 0}, {5, 0}, {0, 6} };
+    std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
+    std::shared_ptr<Figure<double>> B = std::make_shared<Triangle<double>>(points2);
     ASSERT_TRUE (*A == *B);
 }
 
 TEST(test_triangles, test_equal_2) {
     Point2D<double> points[3] = { {0, 0}, {5, 0}, {0, 6} };
     Point2D<double> points2[3] = { {0, 6}, {0, 3}, {5, 0} };
-    Figure<double>* A = new Triangle(points);
-    Figure<double>* B = new Triangle(points2);
+    std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
+    std::shared_ptr<Figure<double>> B = std::make_shared<Triangle<double>>(points2);
     ASSERT_TRUE (*A != *B);
 }
 
 TEST(test_triangles, test_validation_1) {
     Point2D<double> points[3] = { {0, 0}, {5, 0}, {0, 6} };
     try {
-        Figure<double>* A = new Triangle(points);
+        std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
         SUCCEED();
     } 
     catch (std::logic_error &l_ex) {
@@ -60,7 +60,7 @@ TEST(test_triangles, test_validation_1) {
 TEST(test_triangles, test_validation_2) {
     Point2D<double> points[3] = { {0, 0}, {0, 0}, {0, 6} };
     try {
-        Figure<double>* A = new Triangle(points);
+        std::shared_ptr<Figure<double>> A = std::make_shared<Triangle<double>>(points);
         FAIL();
     } 
     catch (std::logic_error &l_ex) {
@@ -71,4 +71,4 @@ TEST(test_triangles, test_validation_2) {
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-}*/
+}

@@ -7,7 +7,7 @@ template <class T>
 class Triangle final: public Figure<T> {
 public:
     explicit Triangle();
-    explicit Triangle(std::shared_ptr<Point2D<T>> points);
+    explicit Triangle(Point2D<T> points[3]);
 public:
     void input(std::istream &in) override;
     void print(std::ostream &out) const override;
@@ -25,7 +25,7 @@ Triangle<T>::Triangle() : Figure<T>(3) {
 }
 
 template <class T>
-Triangle<T>::Triangle(std::shared_ptr<Point2D<T>> points) : Figure<T>(3) {
+Triangle<T>::Triangle(Point2D<T> points[3]) : Figure<T>(3) {
     for (int i = 0; i < this->cnt_vertices; ++i) {
         this->vertices[i] = points[i];
     }
