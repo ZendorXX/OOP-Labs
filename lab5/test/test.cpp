@@ -1,11 +1,10 @@
 #include <gtest/gtest.h>
-#include <map>
-#include "allocator.hpp"
-#include "container.hpp"
 #include <iostream>
+#include "allocator.hpp"
+#include "forward_list.hpp"
 
 TEST(ForwardListTest, Push_front) {
-    ForwardList<int, allocator> list;
+    ForwardList<int, Allocator> list;
 
     list.push_front(4);
     list.push_front(15);
@@ -15,7 +14,7 @@ TEST(ForwardListTest, Push_front) {
 }
 
 TEST(ForwardListTest, Size) {
-    ForwardList<int, allocator> list;
+    ForwardList<int, Allocator> list;
 
     list.push_front(1);
     list.push_front(2);
@@ -26,8 +25,8 @@ TEST(ForwardListTest, Size) {
     ASSERT_EQ(list.size(), 5);
 }
 
-TEST(ForwardListTest, Eraze) {
-    ForwardList<int, allocator> list;
+TEST(ForwardListTest, Erase_1) {
+    ForwardList<int, Allocator> list;
 
     list.push_front(1);
     list.push_front(2);
@@ -40,16 +39,33 @@ TEST(ForwardListTest, Eraze) {
     ASSERT_EQ(list.size(), 4);
 }
 
+TEST(ForwardListTest, Erase_2) {
+    ForwardList<int, Allocator> list;
+
+    list.push_front(1);
+    list.push_front(5);
+    list.push_front(6);
+    list.push_front(2);
+
+    ForwardList<int, Allocator>::ListIterator it = list.begin();
+    ++it;
+    list.erase(it);
+
+    ASSERT_EQ(list.size(), 3);
+    ASSERT_EQ(list[0], 2);
+    ASSERT_EQ(list[1], 5);
+}
+
 TEST(ForwardListTest, Insert) {
     
-    ForwardList<int, allocator> list;
+    ForwardList<int, Allocator> list;
 
     list.push_front(1);
     list.push_front(2);
     list.push_front(3);
     list.push_front(4);
 
-    ForwardList<int, allocator>::ListIterator it = list.begin();
+    ForwardList<int, Allocator>::ListIterator it = list.begin();
     ++it;
     ++it;
 

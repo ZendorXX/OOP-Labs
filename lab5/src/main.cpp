@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 #include "allocator.hpp"
-#include "container.hpp"
+#include "forward_list.hpp"
 
 int fact(int n) {
     int result = 1;
@@ -12,7 +12,10 @@ int fact(int n) {
 }
 
 int main() {
-    std::map<int, int, std::less<int>, allocator< std::pair<const int, int> > > test_map;
+    
+    std::cout << "=========================" << std::endl;
+    std::cout << "Example with map" << std::endl;
+    std::map<int, int, std::less<int>, Allocator< std::pair<const int, int> > > test_map;
 
     for (int i = 1; i < 10; ++i) {
         test_map.insert(std::pair<int, int>(i, fact(i)));
@@ -22,18 +25,27 @@ int main() {
         std::cout << elem.first << ' ' << elem.second << std::endl;
     }
 
-    ForwardList<int, allocator> list;
+    std::cout << "=========================" << std::endl;
+    std::cout << "Example with forward list" << std::endl;
+    ForwardList<int, Allocator> list;
 
     list.push_front(1);
-    list.push_front(2);
-    list.push_front(3);
-    list.push_front(4);
     list.push_front(5);
-    
-    for (int i = 0; i < 5; ++i){
-        std::cout << list[i] << std::endl;
+    list.push_front(6);
+    list.push_front(2);
+
+    for (int i = 0; i < list.size(); ++i){
+        std::cout << list[i] << " ";
     }
-
-
+    std::cout << std::endl;
+    ForwardList<int, Allocator>::ListIterator it = list.begin();
+    ++it; ++it; ++it; ++it;
+    list.insert(it, 10);
+    for (int i = 0; i < list.size(); ++i){
+        std::cout << list[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "=========================" << std::endl;
+    
     return 0;
 }
