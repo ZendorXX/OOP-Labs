@@ -20,8 +20,8 @@ public:
         {
             std::cout << std::endl
                       << "Murder --------" << std::endl;
-            attacker->print();
-            defender->print();
+            std::cout << "attacker: "; attacker->print();
+            std::cout << "defender: "; defender->print();
         }
     }
 };
@@ -108,6 +108,23 @@ std::ostream &operator<<(std::ostream &os, const set_t &array)
     return os;
 }
 
+
+// Visitor
+set_t fight(const set_t &array, size_t distance) {
+    set_t dead_list;
+
+    for (const auto &attacker : array)
+        for (const auto &defender : array) 
+            if ((attacker != defender) && (attacker->is_close(defender, distance))) {
+                bool success = defender->accept(attacker);
+                if (success)
+                    dead_list.insert(defender);
+            }
+    
+    return dead_list;
+}
+
+/*
 set_t fight(const set_t &array, size_t distance) {
     set_t dead_list;
 
@@ -118,18 +135,21 @@ set_t fight(const set_t &array, size_t distance) {
                 if (defender->is_squirrel()) 
                     success = attacker->fight(std::dynamic_pointer_cast<Squirrel>(defender));
                 if (defender->is_werewolf())
-                     success = attacker->fight(std::dynamic_pointer_cast<Werewolf>(defender));
+                    success = attacker->fight(std::dynamic_pointer_cast<Werewolf>(defender));
                 if (defender->is_druid())
-                     success = attacker->fight(std::dynamic_pointer_cast<Druid>(defender));
+                    success = attacker->fight(std::dynamic_pointer_cast<Druid>(defender));
                 if (success)
                     dead_list.insert(defender);
             }
     
     return dead_list;
 }
+*/
 
 
 int main() {
+    srand(time(0));
+
     set_t array; // monsters
 
     // Generate start monsters' positions
@@ -152,8 +172,12 @@ int main() {
 
     for (size_t distance = 20; (distance <= 100) && !array.empty(); distance += 10) {
         auto dead_list = fight(array, distance);
-        for (auto &d : dead_list) 
+        //std::cout << "=====================================\n Dead_list: ";
+        for (auto &d : dead_list)  {
             array.erase(d);
+            //d->print();
+        }
+        //std::cout << "=====================================\n";
         std::cout << "Fight stats ----------" << std::endl
                   << "distance: " << distance << std::endl
                   << "killed: " << dead_list.size() << std::endl

@@ -23,6 +23,7 @@ bool NPC::is_close(const std::shared_ptr<NPC> &other, size_t distance) const {
         return false;
 }
 
+/*
 bool NPC::is_squirrel() const {
     return false;
 }
@@ -32,6 +33,19 @@ bool NPC::is_werewolf() const {
 }
 
 bool NPC::is_druid() const {
+    return false;
+}
+*/
+
+bool NPC::visit_Squirrel(std::shared_ptr<Squirrel> other) {
+    return false;
+}
+
+bool NPC::visit_Werewolf(std::shared_ptr<Werewolf> other) {
+    return false;
+}
+
+bool NPC::visit_Druid(std::shared_ptr<Druid> other) {
     return false;
 }
 

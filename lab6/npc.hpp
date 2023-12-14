@@ -42,6 +42,7 @@ struct NPC : public std::enable_shared_from_this<NPC> {
     void fight_notify(const std::shared_ptr<NPC> defender, bool win);
     virtual bool is_close(const std::shared_ptr<NPC> &other, size_t distance) const;
 
+    /*
     virtual bool is_squirrel() const;
     virtual bool is_werewolf() const;
     virtual bool is_druid() const;
@@ -49,6 +50,14 @@ struct NPC : public std::enable_shared_from_this<NPC> {
     virtual bool fight(std::shared_ptr<Squirrel> other) = 0;
     virtual bool fight(std::shared_ptr<Werewolf> other) = 0;
     virtual bool fight(std::shared_ptr<Druid> other) = 0;
+    */
+
+    virtual bool visit_Squirrel(std::shared_ptr<Squirrel> other);
+    virtual bool visit_Werewolf(std::shared_ptr<Werewolf> other);
+    virtual bool visit_Druid(std::shared_ptr<Druid> other);
+
+    virtual bool accept(std::shared_ptr<NPC> attacker) = 0;
+
     virtual void print() = 0;
 
     virtual void save(std::ostream &os);
