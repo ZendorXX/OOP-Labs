@@ -9,7 +9,7 @@ struct Werewolf : public NPC {
     void save(std::ostream &os) override;
     bool is_werewolf() const override;
 
-    bool fight(std::shared_ptr<Werewolf> other) override;
+    bool fight(std::shared_ptr<Squirrel> other) override;
     bool fight(std::shared_ptr<Werewolf> other) override;
     bool fight(std::shared_ptr<Druid> other) override;
     friend std::ostream &operator<<(std::ostream &os, Werewolf &werewolf);

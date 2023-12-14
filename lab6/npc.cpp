@@ -41,6 +41,6 @@ void NPC::save(std::ostream &os) {
 }
 
 std::ostream &operator<<(std::ostream &os, NPC &npc) {
-    os << "{ x:" << npc.x << ", y:" << npc.y << "} ";
+    os << "{ x:" << npc.x << ", y:" << npc.y << " } ";
     return os;
 }

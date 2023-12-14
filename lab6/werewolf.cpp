@@ -18,7 +18,7 @@ bool Werewolf::is_werewolf() const {
     return true;
 }
 
-bool Werewolf::fight(std::shared_ptr<Werewolf> other) {
+bool Werewolf::fight(std::shared_ptr<Squirrel> other) {
     fight_notify(other, false);
     return false;
 }

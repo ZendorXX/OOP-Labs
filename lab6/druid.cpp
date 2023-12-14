@@ -18,7 +18,12 @@ bool Druid::is_druid() const {
     return true;
 }
 
-bool Druid::fight(std::shared_ptr<Druid> other) {
+bool Druid::fight(std::shared_ptr<Squirrel> other) {
+    fight_notify(other, false);
+    return false;
+}
+
+bool Druid::fight(std::shared_ptr<Werewolf> other) {
     fight_notify(other, false);
     return false;
 }
@@ -26,14 +31,9 @@ bool Druid::fight(std::shared_ptr<Druid> other) {
 bool Druid::fight(std::shared_ptr<Druid> other) {
     fight_notify(other, false);
     return false;
-}
-
-bool Druid::fight(std::shared_ptr<Druid> other) {
-    fight_notify(other, true);
-    return true;
 }
 
 std::ostream &operator<<(std::ostream &os, Druid &druid) {
-    os << "Druid: " << *static_cast<NPC *>(&druid) << std::endl;
+    os << "druid: " << *static_cast<NPC *>(&druid) << std::endl;
     return os;
 }

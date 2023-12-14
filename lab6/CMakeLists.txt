@@ -5,6 +5,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(lab6_exe main.cpp npc.cpp druid.cpp squirrel.cpp werewolf.cpp)
 enable_testing()
 add_executable(lab6_test tests.cpp)
-target_link_libraries(tests ${GTEST_LIBRARIES})
+target_link_libraries(lab6_test ${GTEST_LIBRARIES})
 
-add_test(NAME BASIC COMMAND tests)
+add_test(NAME BASIC COMMAND lab6_test)
