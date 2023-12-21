@@ -1,7 +1,7 @@
 #ifndef DRUID_HPP
 #define DRUID_HPP
 
-struct Druid : public NPC {
+struct Druid final : public NPC {
     Druid(int x, int y);
     Druid(std::istream &is);
 

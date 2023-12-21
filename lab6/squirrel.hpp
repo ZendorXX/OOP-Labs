@@ -3,7 +3,7 @@
 
 #include "npc.hpp"
 
-struct Squirrel : public NPC {
+struct Squirrel final : public NPC {
     Squirrel(int x, int y);
     Squirrel(std::istream &is);
 

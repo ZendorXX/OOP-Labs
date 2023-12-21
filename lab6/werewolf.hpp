@@ -1,7 +1,7 @@
 #ifndef WEREWOLF_HPP
 #define WEREWOLF_HPP
 
-struct Werewolf : public NPC {
+struct Werewolf final : public NPC {
     Werewolf(int x, int y);
     Werewolf(std::istream &is);
 
